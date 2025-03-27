@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Network Canvas Editor</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Network Canvas Editor</h1>
+    </div>
+
+    <div class="tools">
+      <button id="load-image-btn" class="tool-btn">Load Background Image</button>
+      <input type="file" id="image-input" class="file-input" accept=".svg,.png,.jpg,.jpeg">
+
+      <div class="zoom-controls">
+        <button id="zoom-out-btn" class="tool-btn">-</button>
+        <span id="zoom-level">100%</span>
+        <button id="zoom-in-btn" class="tool-btn">+</button>
+      </div>
+
+      <button id="add-node-btn" class="tool-btn">Add Node</button>
+      <button id="add-connection-btn" class="tool-btn">Add Connection</button>
+      <button id="select-btn" class="tool-btn active">Select</button>
+      <button id="clear-canvas-btn" class="tool-btn">Clear Canvas</button>
+      <button id="download-json-btn" class="tool-btn">Download JSON</button>
+    </div>
+
+    <div class="pathfinding-panel">
+      <div class="path-inputs">
+        <div class="input-group">
+          <label for="source-node">Source:</label>
+          <select id="source-node">
+            <option value="">Select source node</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="destination-node">Destination:</label>
+          <select id="destination-node">
+            <option value="">Select destination node</option>
+          </select>
+        </div>
+      </div>
+      <button id="find-path-btn" class="tool-btn">Find Shortest Path</button>
+      <button id="clear-path-btn" class="tool-btn">Clear Path</button>
+    </div>
+
+    <div class="canvas-container">
+      <div id="canvas-wrapper">
+        <img id="background-image" src="" alt="">
+        <canvas id="canvas"></canvas>
+      </div>
+      <div id="context-menu" class="context-menu">
+        <div class="context-menu-item" id="edit-node">Edit Node</div>
+        <div class="context-menu-item" id="delete-node">Delete Node</div>
+        <div class="context-menu-item" id="toggle-mark">Mark/Unmark Node</div>
+      </div>
+    </div>
+
+    <div class="properties-panel">
+      <h3>Selected Node Properties</h3>
+      <div id="node-properties">
+        <p>No node selected</p>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>Instructions:</h3>
+      <ul>
+        <li>Use the "Load Background Image" button to upload an image.</li>
+        <li>Use +/- buttons or Ctrl + Mouse Wheel to zoom in/out.</li>
+        <li>Click "Add Node" and then click on the canvas to place nodes.</li>
+        <li>Right-click on nodes to edit, delete, or mark as source/destination.</li>
+        <li>Use the "Select" tool to move nodes and pan the canvas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Node Edit Modal -->
+  <div id="node-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Node</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="form-group">
+        <label for="node-id">ID:</label>
+        <input type="text" id="node-id" readonly>
+      </div>
+      <div class="form-group">
+        <label for="node-label">Label:</label>
+        <input type="text" id="node-label">
+      </div>
+      <div class="form-group">
+        <label for="node-color">Color:</label>
+        <input type="color" id="node-color" value="#3498db">
+      </div>
+      <div class="form-group">
+        <label for="node-size">Size:</label>
+        <input type="range" id="node-size" min="5" max="30" value="10">
+      </div>
+      <div class="form-actions">
+        <button id="save-node-btn" class="tool-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
